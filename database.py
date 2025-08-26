@@ -8,7 +8,7 @@ DATABASE_URL = URL.create(
     drivername="mysql+pymysql",
     username="root",
     password="@#$123qweASD",  # your raw password, no encoding needed
-    host="localhos",
+    host="localhost",
     port=3306,               # default MySQL port
     database="fastapi_db"
 )

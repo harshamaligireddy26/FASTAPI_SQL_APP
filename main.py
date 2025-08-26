@@ -50,7 +50,7 @@ def update_employee(emp_id: int, update: schemas.EmployeeUpdate, db: Session = D
     db.refresh(emp)
     return emp
 
-# Delete employee
+# Delete employe
 @app.delete("/employees/{emp_id}")
 def delete_employee(emp_id: int, db: Session = Depends(get_db)):
     emp = db.query(models.Employee).filter(models.Employee.id == emp_id).first()
