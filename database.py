@@ -1,14 +1,17 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-import os
+from sqlalchemy.engine import URL
 
-# Get DATABASE_URL from environment
-DATABASE_URL = os.getenv("DATABASE_URL")
-
-# Fix postgres:// → postgresql+psycopg://
-if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+psycopg://", 1)
+# ✅ Build connection safely
+DATABASE_URL = URL.create(
+    drivername="mysql+pymysql",
+    username="root",
+    password="@#$123qweASD",  # your raw password, no encoding needed
+    host="localhost",
+    port=3306,               # default MySQL port
+    database="fastapi_db"
+)
 
 # ✅ Engine
 engine = create_engine(DATABASE_URL)
