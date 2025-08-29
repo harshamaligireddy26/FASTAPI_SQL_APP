@@ -1,19 +1,16 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.engine import URL
+import os
 
-# ✅ Build connection safely
-DATABASE_URL = URL.create(
-    drivername="mysql+pymysql",
-    username="root",
-    password="@#$123qweASD",  # your raw password, no encoding needed
-    host="localhost",
-    port=3306,               # default MySQL port
-    database="fastapi_db"
-)
+# ✅ Get DATABASE_URL from environment variable
+# Example (Render will give this): postgres://user:password@host:5432/dbname
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-# ✅ Engine
+if not DATABASE_URL:
+    raise ValueError("❌ DATABASE_URL is not set. Add it in Render Environment Variables.")
+
+# ✅ Create engine
 engine = create_engine(DATABASE_URL)
 
 # ✅ Session
